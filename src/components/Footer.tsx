@@ -1,4 +1,4 @@
-import { Gamepad2, Github } from "lucide-react";
+import { Gamepad2, Globe } from "lucide-react";
 
 export function Footer() {
   return (
@@ -18,7 +18,7 @@ export function Footer() {
 
         <div className="flex items-center gap-4">
           <a href="#" className="p-2 rounded-full bg-secondary/10 text-secondary hover:bg-secondary/30 transition-colors">
-            <Github className="w-5 h-5" />
+            <Globe className="w-5 h-5" />
           </a>
         </div>
       </div>
