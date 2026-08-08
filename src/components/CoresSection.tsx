@@ -42,25 +42,37 @@ export function CoresSection() {
             <motion.div variants={cardVariants} whileHover="hover">
               <Card className="bg-card border-primary/20 hover:border-primary transition-colors cursor-pointer shadow-lg hover:shadow-primary/20">
                 <CardHeader><CardTitle>NES (Nintendinho)</CardTitle></CardHeader>
-                <CardContent><p className="text-lg text-primary font-bold">FCEUmm ou Mesen</p></CardContent>
+                <CardContent>
+                  <p className="text-lg text-primary font-bold">FCEUmm ou Mesen</p>
+                  <p className="text-sm text-muted-foreground mt-2">Mesen é o mais preciso e moderno. FCEUmm é ótimo para PCs mais fracos ou celulares.</p>
+                </CardContent>
               </Card>
             </motion.div>
             <motion.div variants={cardVariants} whileHover="hover">
               <Card className="bg-card border-primary/20 hover:border-primary transition-colors cursor-pointer shadow-lg hover:shadow-primary/20">
                 <CardHeader><CardTitle>Super Nintendo (SNES)</CardTitle></CardHeader>
-                <CardContent><p className="text-lg text-primary font-bold">Snes9x</p></CardContent>
+                <CardContent>
+                  <p className="text-lg text-primary font-bold">Snes9x ou bsnes</p>
+                  <p className="text-sm text-muted-foreground mt-2">Snes9x roda perfeitamente em qualquer aparelho. bsnes é focado em precisão absoluta (exige PC forte).</p>
+                </CardContent>
               </Card>
             </motion.div>
             <motion.div variants={cardVariants} whileHover="hover">
               <Card className="bg-card border-primary/20 hover:border-primary transition-colors cursor-pointer shadow-lg hover:shadow-primary/20">
                 <CardHeader><CardTitle>Game Boy Advance</CardTitle></CardHeader>
-                <CardContent><p className="text-lg text-primary font-bold">mGBA</p></CardContent>
+                <CardContent>
+                  <p className="text-lg text-primary font-bold">mGBA</p>
+                  <p className="text-sm text-muted-foreground mt-2">O rei indiscutível do GBA. Rápido, com suporte a cabos link virtuais e extremante preciso.</p>
+                </CardContent>
               </Card>
             </motion.div>
             <motion.div variants={cardVariants} whileHover="hover">
               <Card className="bg-card border-primary/20 hover:border-primary transition-colors cursor-pointer shadow-lg hover:shadow-primary/20">
                 <CardHeader><CardTitle>Nintendo 64</CardTitle></CardHeader>
-                <CardContent><p className="text-lg text-primary font-bold">Mupen64Plus-Next</p></CardContent>
+                <CardContent>
+                  <p className="text-lg text-primary font-bold">Mupen64Plus-Next</p>
+                  <p className="text-sm text-muted-foreground mt-2">Melhor compatibilidade 3D, com opção de usar o plugin ParaLLEl para gráficos impecáveis.</p>
+                </CardContent>
               </Card>
             </motion.div>
           </motion.div>
@@ -74,13 +86,19 @@ export function CoresSection() {
             <motion.div variants={cardVariants} whileHover="hover">
               <Card className="bg-card border-secondary/20 hover:border-secondary transition-colors cursor-pointer shadow-lg hover:shadow-secondary/20">
                 <CardHeader><CardTitle>Mega Drive / Genesis</CardTitle></CardHeader>
-                <CardContent><p className="text-lg text-secondary font-bold">Genesis Plus GX</p></CardContent>
+                <CardContent>
+                  <p className="text-lg text-secondary font-bold">Genesis Plus GX</p>
+                  <p className="text-sm text-muted-foreground mt-2">Roda Master System, Mega Drive e Sega CD com precisão de 100%. Obrigatório!</p>
+                </CardContent>
               </Card>
             </motion.div>
             <motion.div variants={cardVariants} whileHover="hover">
               <Card className="bg-card border-secondary/20 hover:border-secondary transition-colors cursor-pointer shadow-lg hover:shadow-secondary/20">
                 <CardHeader><CardTitle>Arcade (Fliperama)</CardTitle></CardHeader>
-                <CardContent><p className="text-lg text-secondary font-bold">Final Burn Neo (FBNeo)</p></CardContent>
+                <CardContent>
+                  <p className="text-lg text-secondary font-bold">Final Burn Neo (FBNeo)</p>
+                  <p className="text-sm text-muted-foreground mt-2">A forma mais fácil e estável de rodar clássicos de fliperama (Capcom CPS1/2/3, Neo Geo, etc).</p>
+                </CardContent>
               </Card>
             </motion.div>
           </motion.div>
@@ -94,13 +112,19 @@ export function CoresSection() {
             <motion.div variants={cardVariants} whileHover="hover">
               <Card className="bg-card border-accent/20 hover:border-accent transition-colors cursor-pointer shadow-lg hover:shadow-accent/20">
                 <CardHeader><CardTitle>PlayStation 1 (PSX)</CardTitle></CardHeader>
-                <CardContent><p className="text-lg text-accent font-bold">Beetle PSX ou PCSX ReARMed</p></CardContent>
+                <CardContent>
+                  <p className="text-lg text-accent font-bold">Beetle PSX HW ou SwanStation</p>
+                  <p className="text-sm text-muted-foreground mt-2">Ambos permitem melhorar os gráficos 3D absurdamente. SwanStation é mais leve, Beetle é mais preciso.</p>
+                </CardContent>
               </Card>
             </motion.div>
             <motion.div variants={cardVariants} whileHover="hover">
               <Card className="bg-card border-accent/20 hover:border-accent transition-colors cursor-pointer shadow-lg hover:shadow-accent/20">
                 <CardHeader><CardTitle>PlayStation Portable (PSP)</CardTitle></CardHeader>
-                <CardContent><p className="text-lg text-accent font-bold">PPSSPP</p></CardContent>
+                <CardContent>
+                  <p className="text-lg text-accent font-bold">PPSSPP</p>
+                  <p className="text-sm text-muted-foreground mt-2">O único e melhor emulador de PSP existente. Roda liso e aumenta a resolução nativa sem esforço.</p>
+                </CardContent>
               </Card>
             </motion.div>
           </motion.div>
