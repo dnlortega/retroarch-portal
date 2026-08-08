@@ -52,6 +52,19 @@ export function TipsSection() {
             </ul>
           </AccordionContent>
         </AccordionItem>
+        <AccordionItem value="item-6" className="border-border">
+          <AccordionTrigger className="text-xl hover:text-primary transition-colors text-left">Dica: Como instalar o RetroArch no Android?</AccordionTrigger>
+          <AccordionContent className="text-lg text-muted-foreground space-y-2">
+            <p>Emular no celular é incrível, mas a versão da Google Play Store costuma estar desatualizada e possui limitações técnicas impostas pelo Google.</p>
+            <p><strong>Para a melhor experiência no Android:</strong></p>
+            <ul className="list-disc pl-5">
+              <li>Não baixe da Play Store. Acesse o <a href="https://www.retroarch.com/?page=platforms" target="_blank" rel="noreferrer" className="text-primary hover:underline">site oficial do RetroArch</a> no seu celular.</li>
+              <li>Faça o download da versão <strong>APK (Download 64-bit)</strong>.</li>
+              <li>No seu celular, permita a "Instalação de Fontes Desconhecidas" e instale o APK.</li>
+              <li>A versão do site oficial não tem as restrições da Play Store, permitindo usar mais núcleos (Cores) e acessar os diretórios do seu celular sem bloqueios do Android.</li>
+            </ul>
+          </AccordionContent>
+        </AccordionItem>
       </Accordion>
     </motion.section>
   );

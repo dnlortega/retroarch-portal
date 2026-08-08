@@ -5,6 +5,7 @@ import { AboutSection } from "@/components/AboutSection";
 import { TipsSection } from "@/components/TipsSection";
 import { CoresSection } from "@/components/CoresSection";
 import { FeaturesSection } from "@/components/FeaturesSection";
+import { ThemesGallery } from "@/components/ThemesGallery";
 import { Footer } from "@/components/Footer";
 
 export default function Home() {
@@ -14,6 +15,7 @@ export default function Home() {
         <HeroSection />
         <AboutSection />
         <FeaturesSection />
+        <ThemesGallery />
         <TipsSection />
         <CoresSection />
       </main>
