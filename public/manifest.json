@@ -1,0 +1,21 @@
+{
+  "name": "RetroArch Portal",
+  "short_name": "RetroArch",
+  "description": "O hub definitivo para emulação e jogos clássicos.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#000000",
+  "theme_color": "#ff00ff",
+  "icons": [
+    {
+      "src": "/retro_game.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/retro_game.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

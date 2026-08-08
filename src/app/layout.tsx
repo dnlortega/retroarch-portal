@@ -16,8 +16,10 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "RetroArch - O Guia Definitivo",
-  description: "Tudo sobre o RetroArch: O que é, onde baixar, dicas e os melhores cores para emulação.",
+  title: "RetroArch Portal - O Hub Definitivo",
+  description: "O guia e hub definitivo para emulação com RetroArch.",
+  manifest: "/manifest.json",
+  themeColor: "#ff00ff",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
@@ -26,10 +28,28 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       lang="pt-BR"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased dark`}
     >
+      <head>
+        <link rel="apple-touch-icon" href="/retro_game.png" />
+      </head>
       <body 
         className="min-h-full flex flex-col bg-fixed bg-cover bg-center bg-no-repeat transition-colors duration-500"
         style={{ backgroundImage: "url('/bg-retro.png')" }}
       >
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              if ('serviceWorker' in navigator) {
+                window.addEventListener('load', function() {
+                  navigator.serviceWorker.register('/sw.js').then(function(registration) {
+                    console.log('ServiceWorker registration successful with scope: ', registration.scope);
+                  }, function(err) {
+                    console.log('ServiceWorker registration failed: ', err);
+                  });
+                });
+              }
+            `,
+          }}
+        />
         <ThemeSwitcher />
         <KonamiCode />
         <RetroAnimations />
