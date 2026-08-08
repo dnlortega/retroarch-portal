@@ -4,7 +4,7 @@ import { Settings } from "lucide-react";
 import { motion } from "framer-motion";
 
 export function CoresSection() {
-  const cardVariants = {
+  const cardVariants: any = {
     hidden: { opacity: 0, scale: 0.8 },
     visible: { opacity: 1, scale: 1 },
     hover: { scale: 1.05, rotate: [-1, 1, -1, 0], transition: { type: "spring", stiffness: 300 } }
