@@ -2,6 +2,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Settings } from "lucide-react";
 import { motion } from "framer-motion";
+import Image from "next/image";
 
 export function CoresSection() {
   const cardVariants: any = {
@@ -35,6 +36,9 @@ export function CoresSection() {
         </TabsList>
         
         <TabsContent value="nintendo" className="mt-4">
+          <div className="flex justify-center mb-6">
+            <Image src="/nintendo.png" alt="Nintendo Consoles" width={400} height={300} className="rounded-lg shadow-[0_0_20px_rgba(255,0,255,0.4)]" />
+          </div>
           <motion.div 
             initial="hidden" animate="visible" variants={{ visible: { transition: { staggerChildren: 0.1 } } }}
             className="grid grid-cols-1 md:grid-cols-2 gap-4"
@@ -79,6 +83,9 @@ export function CoresSection() {
         </TabsContent>
         
         <TabsContent value="sega" className="mt-4">
+          <div className="flex justify-center mb-6">
+            <Image src="/sega.png" alt="Sega Consoles" width={400} height={300} className="rounded-lg shadow-[0_0_20px_rgba(0,255,255,0.4)]" />
+          </div>
           <motion.div 
             initial="hidden" animate="visible" variants={{ visible: { transition: { staggerChildren: 0.1 } } }}
             className="grid grid-cols-1 md:grid-cols-2 gap-4"
@@ -105,6 +112,9 @@ export function CoresSection() {
         </TabsContent>
         
         <TabsContent value="sony" className="mt-4">
+          <div className="flex justify-center mb-6">
+            <Image src="/sony.png" alt="Sony Consoles" width={400} height={300} className="rounded-lg shadow-[0_0_20px_rgba(0,255,100,0.4)]" />
+          </div>
           <motion.div 
             initial="hidden" animate="visible" variants={{ visible: { transition: { staggerChildren: 0.1 } } }}
             className="grid grid-cols-1 md:grid-cols-2 gap-4"
