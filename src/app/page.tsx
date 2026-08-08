@@ -8,6 +8,8 @@ import { FeaturesSection } from "@/components/FeaturesSection";
 import { ThemesGallery } from "@/components/ThemesGallery";
 import { HardwareAnalyzer } from "@/components/HardwareAnalyzer";
 import { ConfigBuilder } from "@/components/ConfigBuilder";
+import { CheatBuilder } from "@/components/CheatBuilder";
+import { RetroDictionary } from "@/components/RetroDictionary";
 import { Footer } from "@/components/Footer";
 
 export default function Home() {
@@ -20,6 +22,8 @@ export default function Home() {
         <ThemesGallery />
         <HardwareAnalyzer />
         <ConfigBuilder />
+        <CheatBuilder />
+        <RetroDictionary />
         <TipsSection />
         <CoresSection />
       </main>

@@ -4,6 +4,7 @@ import "./globals.css";
 import { ThemeSwitcher } from "@/components/ThemeSwitcher";
 import { KonamiCode } from "@/components/KonamiCode";
 import { RetroAnimations } from "@/components/RetroAnimations";
+import { RetroRadio } from "@/components/RetroRadio";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -53,6 +54,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <ThemeSwitcher />
         <KonamiCode />
         <RetroAnimations />
+        <RetroRadio />
         <div className="flex-1 bg-background/80 backdrop-blur-sm transition-colors duration-500 z-10 relative">
           {children}
         </div>
