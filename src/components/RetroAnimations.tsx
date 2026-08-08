@@ -61,7 +61,7 @@ export function RetroAnimations() {
       >
         <motion.svg 
           animate={{ scaleY: [1, 0.8, 1] }}
-          transition={{ duration: 0.5, repeat: Infinity, ease: "steps(2)" }}
+          transition={{ duration: 0.5, repeat: Infinity, ease: "linear" }}
           viewBox="0 0 11 8" 
           className="w-full h-full fill-secondary drop-shadow-[0_0_8px_rgba(0,255,255,0.8)]"
         >
