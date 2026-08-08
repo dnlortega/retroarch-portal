@@ -68,10 +68,10 @@ export function CoresSection() {
       </div>
 
       <Tabs defaultValue="nintendo" className="w-full flex flex-col">
-        <TabsList className="flex w-full max-w-3xl mx-auto mb-6 bg-muted/50 p-1 rounded-lg h-14">
-          <TabsTrigger value="nintendo" className="flex-1 text-base md:text-lg data-[state=active]:bg-primary data-[state=active]:text-primary-foreground">Nintendo</TabsTrigger>
-          <TabsTrigger value="sega" className="flex-1 text-base md:text-lg data-[state=active]:bg-secondary data-[state=active]:text-secondary-foreground">Sega & Arcade</TabsTrigger>
-          <TabsTrigger value="sony" className="flex-1 text-base md:text-lg data-[state=active]:bg-accent data-[state=active]:text-accent-foreground">Sony</TabsTrigger>
+        <TabsList className="flex flex-col sm:flex-row w-full max-w-3xl mx-auto mb-6 bg-muted/50 p-2 rounded-lg h-auto gap-2">
+          <TabsTrigger value="nintendo" className="flex-1 py-3 text-base md:text-lg data-[state=active]:bg-primary data-[state=active]:text-primary-foreground">Nintendo</TabsTrigger>
+          <TabsTrigger value="sega" className="flex-1 py-3 text-base md:text-lg data-[state=active]:bg-secondary data-[state=active]:text-secondary-foreground">Sega & Arcade</TabsTrigger>
+          <TabsTrigger value="sony" className="flex-1 py-3 text-base md:text-lg data-[state=active]:bg-accent data-[state=active]:text-accent-foreground">Sony</TabsTrigger>
         </TabsList>
         
         <TabsContent value="nintendo" className="mt-4">
