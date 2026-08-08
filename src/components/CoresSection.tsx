@@ -4,12 +4,51 @@ import { Settings } from "lucide-react";
 import { motion } from "framer-motion";
 import Image from "next/image";
 
+const nintendoCores = [
+  { id: "nes", name: "NES (Nintendinho)", core: "FCEUmm ou Mesen", desc: "Mesen é o mais preciso e moderno. FCEUmm é ótimo para PCs mais fracos ou celulares.", img: "/nes_card.png" },
+  { id: "snes", name: "Super Nintendo (SNES)", core: "Snes9x ou bsnes", desc: "Snes9x roda perfeitamente em qualquer aparelho. bsnes é focado em precisão absoluta (exige PC forte).", img: "/snes_card.png" },
+  { id: "gba", name: "Game Boy Advance", core: "mGBA", desc: "O rei indiscutível do GBA. Rápido, com suporte a cabos link virtuais e extremante preciso.", img: "/gba_card.png" },
+  { id: "n64", name: "Nintendo 64", core: "Mupen64Plus-Next", desc: "Melhor compatibilidade 3D, com opção de usar o plugin ParaLLEl para gráficos impecáveis.", img: "/n64_card.png" },
+];
+
+const segaCores = [
+  { id: "genesis", name: "Mega Drive / Genesis", core: "Genesis Plus GX", desc: "Roda Master System, Mega Drive e Sega CD com precisão de 100%. Obrigatório!", img: "/genesis_card.png" },
+  { id: "arcade", name: "Arcade (Fliperama)", core: "Final Burn Neo (FBNeo)", desc: "A forma mais fácil e estável de rodar clássicos de fliperama (Capcom CPS1/2/3, Neo Geo, etc).", img: "/arcade_card.png" },
+];
+
+const sonyCores = [
+  { id: "ps1", name: "PlayStation 1 (PSX)", core: "Beetle PSX HW ou SwanStation", desc: "Ambos permitem melhorar os gráficos 3D absurdamente. SwanStation é mais leve, Beetle é mais preciso.", img: "/ps1_card.png" },
+  { id: "psp", name: "PlayStation Portable (PSP)", core: "PPSSPP", desc: "O único e melhor emulador de PSP existente. Roda liso e aumenta a resolução nativa sem esforço.", img: "/psp_card.png" },
+];
+
 export function CoresSection() {
   const cardVariants: any = {
     hidden: { opacity: 0, scale: 0.8 },
     visible: { opacity: 1, scale: 1 },
     hover: { scale: 1.05, rotate: [-1, 1, -1, 0], transition: { type: "spring", stiffness: 300 } }
   };
+
+  const renderCards = (cores: any[], colorClass: string) => (
+    <motion.div 
+      initial="hidden" animate="visible" variants={{ visible: { transition: { staggerChildren: 0.1 } } }}
+      className="grid grid-cols-1 md:grid-cols-2 gap-8"
+    >
+      {cores.map((core) => (
+        <motion.div key={core.id} variants={cardVariants} whileHover="hover">
+          <Card className={`bg-card border-${colorClass}/20 hover:border-${colorClass} transition-colors cursor-pointer shadow-lg hover:shadow-${colorClass}/20 overflow-hidden`}>
+            <div className={`w-full h-48 relative border-b border-${colorClass}/20`}>
+              <Image src={core.img} alt={core.name} fill className="object-cover" />
+            </div>
+            <CardHeader><CardTitle>{core.name}</CardTitle></CardHeader>
+            <CardContent>
+              <p className={`text-lg text-${colorClass} font-bold`}>{core.core}</p>
+              <p className="text-sm text-muted-foreground mt-2">{core.desc}</p>
+            </CardContent>
+          </Card>
+        </motion.div>
+      ))}
+    </motion.div>
+  );
 
   return (
     <motion.section 
@@ -36,123 +75,15 @@ export function CoresSection() {
         </TabsList>
         
         <TabsContent value="nintendo" className="mt-4">
-          <motion.div 
-            initial="hidden" animate="visible" variants={{ visible: { transition: { staggerChildren: 0.1 } } }}
-            className="grid grid-cols-1 md:grid-cols-2 gap-8"
-          >
-            <motion.div variants={cardVariants} whileHover="hover">
-              <Card className="bg-card border-primary/20 hover:border-primary transition-colors cursor-pointer shadow-lg hover:shadow-primary/20 overflow-hidden">
-                <div className="w-full h-48 relative border-b border-primary/20">
-                  <Image src="/nes_card.png" alt="NES Console" fill className="object-cover" />
-                </div>
-                <CardHeader><CardTitle>NES (Nintendinho)</CardTitle></CardHeader>
-                <CardContent>
-                  <p className="text-lg text-primary font-bold">FCEUmm ou Mesen</p>
-                  <p className="text-sm text-muted-foreground mt-2">Mesen é o mais preciso e moderno. FCEUmm é ótimo para PCs mais fracos ou celulares.</p>
-                </CardContent>
-              </Card>
-            </motion.div>
-            <motion.div variants={cardVariants} whileHover="hover">
-              <Card className="bg-card border-primary/20 hover:border-primary transition-colors cursor-pointer shadow-lg hover:shadow-primary/20 overflow-hidden">
-                <div className="w-full h-48 relative border-b border-primary/20">
-                  <Image src="/snes_card.png" alt="SNES Console" fill className="object-cover" />
-                </div>
-                <CardHeader><CardTitle>Super Nintendo (SNES)</CardTitle></CardHeader>
-                <CardContent>
-                  <p className="text-lg text-primary font-bold">Snes9x ou bsnes</p>
-                  <p className="text-sm text-muted-foreground mt-2">Snes9x roda perfeitamente em qualquer aparelho. bsnes é focado em precisão absoluta (exige PC forte).</p>
-                </CardContent>
-              </Card>
-            </motion.div>
-            <motion.div variants={cardVariants} whileHover="hover">
-              <Card className="bg-card border-primary/20 hover:border-primary transition-colors cursor-pointer shadow-lg hover:shadow-primary/20 overflow-hidden">
-                <div className="w-full h-48 relative border-b border-primary/20">
-                  <Image src="/gba_card.png" alt="GBA Console" fill className="object-cover" />
-                </div>
-                <CardHeader><CardTitle>Game Boy Advance</CardTitle></CardHeader>
-                <CardContent>
-                  <p className="text-lg text-primary font-bold">mGBA</p>
-                  <p className="text-sm text-muted-foreground mt-2">O rei indiscutível do GBA. Rápido, com suporte a cabos link virtuais e extremante preciso.</p>
-                </CardContent>
-              </Card>
-            </motion.div>
-            <motion.div variants={cardVariants} whileHover="hover">
-              <Card className="bg-card border-primary/20 hover:border-primary transition-colors cursor-pointer shadow-lg hover:shadow-primary/20 overflow-hidden">
-                <div className="w-full h-48 relative border-b border-primary/20">
-                  <Image src="/n64_card.png" alt="N64 Console" fill className="object-cover" />
-                </div>
-                <CardHeader><CardTitle>Nintendo 64</CardTitle></CardHeader>
-                <CardContent>
-                  <p className="text-lg text-primary font-bold">Mupen64Plus-Next</p>
-                  <p className="text-sm text-muted-foreground mt-2">Melhor compatibilidade 3D, com opção de usar o plugin ParaLLEl para gráficos impecáveis.</p>
-                </CardContent>
-              </Card>
-            </motion.div>
-          </motion.div>
+          {renderCards(nintendoCores, "primary")}
         </TabsContent>
         
         <TabsContent value="sega" className="mt-4">
-          <motion.div 
-            initial="hidden" animate="visible" variants={{ visible: { transition: { staggerChildren: 0.1 } } }}
-            className="grid grid-cols-1 md:grid-cols-2 gap-8"
-          >
-            <motion.div variants={cardVariants} whileHover="hover">
-              <Card className="bg-card border-secondary/20 hover:border-secondary transition-colors cursor-pointer shadow-lg hover:shadow-secondary/20 overflow-hidden">
-                <div className="w-full h-48 relative border-b border-secondary/20">
-                  <Image src="/genesis_card.png" alt="Sega Genesis" fill className="object-cover" />
-                </div>
-                <CardHeader><CardTitle>Mega Drive / Genesis</CardTitle></CardHeader>
-                <CardContent>
-                  <p className="text-lg text-secondary font-bold">Genesis Plus GX</p>
-                  <p className="text-sm text-muted-foreground mt-2">Roda Master System, Mega Drive e Sega CD com precisão de 100%. Obrigatório!</p>
-                </CardContent>
-              </Card>
-            </motion.div>
-            <motion.div variants={cardVariants} whileHover="hover">
-              <Card className="bg-card border-secondary/20 hover:border-secondary transition-colors cursor-pointer shadow-lg hover:shadow-secondary/20 overflow-hidden">
-                <div className="w-full h-48 relative border-b border-secondary/20">
-                  <Image src="/arcade_card.png" alt="Arcade Cabinet" fill className="object-cover" />
-                </div>
-                <CardHeader><CardTitle>Arcade (Fliperama)</CardTitle></CardHeader>
-                <CardContent>
-                  <p className="text-lg text-secondary font-bold">Final Burn Neo (FBNeo)</p>
-                  <p className="text-sm text-muted-foreground mt-2">A forma mais fácil e estável de rodar clássicos de fliperama (Capcom CPS1/2/3, Neo Geo, etc).</p>
-                </CardContent>
-              </Card>
-            </motion.div>
-          </motion.div>
+          {renderCards(segaCores, "secondary")}
         </TabsContent>
         
         <TabsContent value="sony" className="mt-4">
-          <motion.div 
-            initial="hidden" animate="visible" variants={{ visible: { transition: { staggerChildren: 0.1 } } }}
-            className="grid grid-cols-1 md:grid-cols-2 gap-8"
-          >
-            <motion.div variants={cardVariants} whileHover="hover">
-              <Card className="bg-card border-accent/20 hover:border-accent transition-colors cursor-pointer shadow-lg hover:shadow-accent/20 overflow-hidden">
-                <div className="w-full h-48 relative border-b border-accent/20">
-                  <Image src="/ps1_card.png" alt="PlayStation 1" fill className="object-cover" />
-                </div>
-                <CardHeader><CardTitle>PlayStation 1 (PSX)</CardTitle></CardHeader>
-                <CardContent>
-                  <p className="text-lg text-accent font-bold">Beetle PSX HW ou SwanStation</p>
-                  <p className="text-sm text-muted-foreground mt-2">Ambos permitem melhorar os gráficos 3D absurdamente. SwanStation é mais leve, Beetle é mais preciso.</p>
-                </CardContent>
-              </Card>
-            </motion.div>
-            <motion.div variants={cardVariants} whileHover="hover">
-              <Card className="bg-card border-accent/20 hover:border-accent transition-colors cursor-pointer shadow-lg hover:shadow-accent/20 overflow-hidden">
-                <div className="w-full h-48 relative border-b border-accent/20">
-                  <Image src="/psp_card.png" alt="PSP Console" fill className="object-cover" />
-                </div>
-                <CardHeader><CardTitle>PlayStation Portable (PSP)</CardTitle></CardHeader>
-                <CardContent>
-                  <p className="text-lg text-accent font-bold">PPSSPP</p>
-                  <p className="text-sm text-muted-foreground mt-2">O único e melhor emulador de PSP existente. Roda liso e aumenta a resolução nativa sem esforço.</p>
-                </CardContent>
-              </Card>
-            </motion.div>
-          </motion.div>
+          {renderCards(sonyCores, "accent")}
         </TabsContent>
       </Tabs>
     </motion.section>
