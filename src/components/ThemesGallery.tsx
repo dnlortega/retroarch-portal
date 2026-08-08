@@ -48,10 +48,10 @@ export function ThemesGallery() {
           <div className="w-3/4 h-3/4 border-4 border-green-500 bg-black flex flex-col items-center justify-start p-4" style={{ imageRendering: 'pixelated' }}>
             <div className="text-green-500 font-mono font-bold tracking-widest text-lg mb-4 uppercase">RetroArch</div>
             <div className="w-full h-1 bg-green-500 mb-4" />
-            <div className="text-green-400 font-mono w-full text-left">> Load Core</div>
-            <div className="text-green-400 font-mono w-full text-left">> Load Content</div>
-            <div className="text-black bg-green-500 font-mono w-full text-left">> Settings</div>
-            <div className="text-green-400 font-mono w-full text-left">> Quit RetroArch</div>
+            <div className="text-green-400 font-mono w-full text-left">&gt; Load Core</div>
+            <div className="text-green-400 font-mono w-full text-left">&gt; Load Content</div>
+            <div className="text-black bg-green-500 font-mono w-full text-left">&gt; Settings</div>
+            <div className="text-green-400 font-mono w-full text-left">&gt; Quit RetroArch</div>
           </div>
         </div>
       )
