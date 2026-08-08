@@ -29,10 +29,10 @@ export function CoresSection() {
       </div>
 
       <Tabs defaultValue="nintendo" className="w-full">
-        <TabsList className="grid w-full grid-cols-1 md:grid-cols-3 bg-muted/50 p-1 rounded-lg">
-          <TabsTrigger value="nintendo" className="text-lg data-[state=active]:bg-primary data-[state=active]:text-primary-foreground">Nintendo</TabsTrigger>
-          <TabsTrigger value="sega" className="text-lg data-[state=active]:bg-secondary data-[state=active]:text-secondary-foreground">Sega & Arcade</TabsTrigger>
-          <TabsTrigger value="sony" className="text-lg data-[state=active]:bg-accent data-[state=active]:text-accent-foreground">Sony</TabsTrigger>
+        <TabsList className="flex w-full max-w-2xl mx-auto bg-muted/50 p-1 rounded-lg h-14">
+          <TabsTrigger value="nintendo" className="flex-1 text-base md:text-lg data-[state=active]:bg-primary data-[state=active]:text-primary-foreground">Nintendo</TabsTrigger>
+          <TabsTrigger value="sega" className="flex-1 text-base md:text-lg data-[state=active]:bg-secondary data-[state=active]:text-secondary-foreground">Sega & Arcade</TabsTrigger>
+          <TabsTrigger value="sony" className="flex-1 text-base md:text-lg data-[state=active]:bg-accent data-[state=active]:text-accent-foreground">Sony</TabsTrigger>
         </TabsList>
         
         <TabsContent value="nintendo" className="mt-4">
