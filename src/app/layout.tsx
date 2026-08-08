@@ -23,7 +23,14 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       lang="pt-BR"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased dark`}
     >
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body 
+        className="min-h-full flex flex-col bg-fixed bg-cover bg-center bg-no-repeat"
+        style={{ backgroundImage: "url('/bg-retro.png')" }}
+      >
+        <div className="flex-1 bg-background/80 backdrop-blur-sm">
+          {children}
+        </div>
+      </body>
     </html>
   );
 }
