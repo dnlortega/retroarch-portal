@@ -1,8 +1,16 @@
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
+import { motion } from "framer-motion";
 
 export function TipsSection() {
   return (
-    <section id="dicas" className="pt-8 space-y-8">
+    <motion.section 
+      initial={{ opacity: 0, scale: 0.95 }}
+      whileInView={{ opacity: 1, scale: 1 }}
+      viewport={{ once: true, margin: "-100px" }}
+      transition={{ type: "spring", stiffness: 70, damping: 15 }}
+      id="dicas" 
+      className="pt-8 space-y-8"
+    >
       <div className="text-center space-y-2">
         <h2 className="text-3xl font-bold">Dicas Essenciais</h2>
         <p className="text-muted-foreground">Tudo o que você precisa saber para começar a jogar.</p>
@@ -33,7 +41,18 @@ export function TipsSection() {
             Alguns consoles (como PS1, Sega CD, Saturn) precisam dos arquivos de BIOS originais do videogame para funcionar. Você deve baixar esses arquivos e colocá-los dentro da pasta <code>system</code> que fica no diretório de instalação do seu RetroArch.
           </AccordionContent>
         </AccordionItem>
+        <AccordionItem value="item-5" className="border-border">
+          <AccordionTrigger className="text-xl hover:text-primary transition-colors">Onde baixo ROMs e como uso?</AccordionTrigger>
+          <AccordionContent className="text-lg text-muted-foreground space-y-2">
+            <p><strong>ROMs</strong> são os arquivos dos jogos. O RetroArch não vem com jogos pré-instalados.</p>
+            <ul className="list-disc pl-5">
+              <li><strong>Legalidade:</strong> É recomendado que você extraia (faça o "dump") dos seus próprios cartuchos e CDs físicos. Para baixar jogos gratuitos, legais e desenvolvidos pela comunidade, recomendamos o site <a href="https://pdroms.de/" target="_blank" rel="noreferrer" className="text-primary hover:underline">PDRoms</a>, focado em jogos de Domínio Público e Homebrews.</li>
+              <li><strong>Como usar:</strong> Crie uma pasta chamada "Games" no seu PC. No RetroArch, vá em <em>Importar Conteúdo &gt; Analisar Diretório</em>. Ele vai procurar as ROMs e criar listas de reprodução lindas (Playlists) separadas por videogame!</li>
+              <li><strong>Dica de Ouro:</strong> Mantenha os arquivos no formato <code>.zip</code> para economizar espaço (a maioria dos Cores da Nintendo e Sega suportam ler arquivos zipados direto).</li>
+            </ul>
+          </AccordionContent>
+        </AccordionItem>
       </Accordion>
-    </section>
+    </motion.section>
   );
 }

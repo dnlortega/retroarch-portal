@@ -1,9 +1,17 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { MonitorPlay } from "lucide-react";
+import { motion } from "framer-motion";
 
 export function AboutSection() {
   return (
-    <section id="sobre" className="pt-8">
+    <motion.section 
+      initial={{ opacity: 0, y: 50 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-100px" }}
+      transition={{ type: "spring", stiffness: 80, damping: 12 }}
+      id="sobre" 
+      className="pt-8"
+    >
       <Card className="border-accent/20 bg-card/50 backdrop-blur">
         <CardHeader>
           <CardTitle className="text-3xl flex items-center gap-3">
@@ -21,6 +29,6 @@ export function AboutSection() {
           </p>
         </CardContent>
       </Card>
-    </section>
+    </motion.section>
   );
 }
