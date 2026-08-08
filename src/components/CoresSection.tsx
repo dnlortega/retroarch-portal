@@ -36,15 +36,15 @@ export function CoresSection() {
         </TabsList>
         
         <TabsContent value="nintendo" className="mt-4">
-          <div className="flex justify-center mb-6">
-            <Image src="/nintendo.png" alt="Nintendo Consoles" width={400} height={300} className="rounded-lg shadow-[0_0_20px_rgba(255,0,255,0.4)]" />
-          </div>
           <motion.div 
             initial="hidden" animate="visible" variants={{ visible: { transition: { staggerChildren: 0.1 } } }}
             className="grid grid-cols-1 md:grid-cols-2 gap-4"
           >
             <motion.div variants={cardVariants} whileHover="hover">
-              <Card className="bg-card border-primary/20 hover:border-primary transition-colors cursor-pointer shadow-lg hover:shadow-primary/20">
+              <Card className="bg-card border-primary/20 hover:border-primary transition-colors cursor-pointer shadow-lg hover:shadow-primary/20 overflow-hidden">
+                <div className="w-full h-48 relative border-b border-primary/20">
+                  <Image src="/nes_card.png" alt="NES Console" fill className="object-cover" />
+                </div>
                 <CardHeader><CardTitle>NES (Nintendinho)</CardTitle></CardHeader>
                 <CardContent>
                   <p className="text-lg text-primary font-bold">FCEUmm ou Mesen</p>
@@ -53,7 +53,10 @@ export function CoresSection() {
               </Card>
             </motion.div>
             <motion.div variants={cardVariants} whileHover="hover">
-              <Card className="bg-card border-primary/20 hover:border-primary transition-colors cursor-pointer shadow-lg hover:shadow-primary/20">
+              <Card className="bg-card border-primary/20 hover:border-primary transition-colors cursor-pointer shadow-lg hover:shadow-primary/20 overflow-hidden">
+                <div className="w-full h-48 relative border-b border-primary/20">
+                  <Image src="/snes_card.png" alt="SNES Console" fill className="object-cover" />
+                </div>
                 <CardHeader><CardTitle>Super Nintendo (SNES)</CardTitle></CardHeader>
                 <CardContent>
                   <p className="text-lg text-primary font-bold">Snes9x ou bsnes</p>
@@ -62,7 +65,10 @@ export function CoresSection() {
               </Card>
             </motion.div>
             <motion.div variants={cardVariants} whileHover="hover">
-              <Card className="bg-card border-primary/20 hover:border-primary transition-colors cursor-pointer shadow-lg hover:shadow-primary/20">
+              <Card className="bg-card border-primary/20 hover:border-primary transition-colors cursor-pointer shadow-lg hover:shadow-primary/20 overflow-hidden">
+                <div className="w-full h-48 relative border-b border-primary/20">
+                  <Image src="/gba_card.png" alt="GBA Console" fill className="object-cover" />
+                </div>
                 <CardHeader><CardTitle>Game Boy Advance</CardTitle></CardHeader>
                 <CardContent>
                   <p className="text-lg text-primary font-bold">mGBA</p>
@@ -71,7 +77,10 @@ export function CoresSection() {
               </Card>
             </motion.div>
             <motion.div variants={cardVariants} whileHover="hover">
-              <Card className="bg-card border-primary/20 hover:border-primary transition-colors cursor-pointer shadow-lg hover:shadow-primary/20">
+              <Card className="bg-card border-primary/20 hover:border-primary transition-colors cursor-pointer shadow-lg hover:shadow-primary/20 overflow-hidden">
+                <div className="w-full h-48 relative border-b border-primary/20">
+                  <Image src="/n64_card.png" alt="N64 Console" fill className="object-cover" />
+                </div>
                 <CardHeader><CardTitle>Nintendo 64</CardTitle></CardHeader>
                 <CardContent>
                   <p className="text-lg text-primary font-bold">Mupen64Plus-Next</p>
@@ -83,15 +92,15 @@ export function CoresSection() {
         </TabsContent>
         
         <TabsContent value="sega" className="mt-4">
-          <div className="flex justify-center mb-6">
-            <Image src="/sega.png" alt="Sega Consoles" width={400} height={300} className="rounded-lg shadow-[0_0_20px_rgba(0,255,255,0.4)]" />
-          </div>
           <motion.div 
             initial="hidden" animate="visible" variants={{ visible: { transition: { staggerChildren: 0.1 } } }}
             className="grid grid-cols-1 md:grid-cols-2 gap-4"
           >
             <motion.div variants={cardVariants} whileHover="hover">
-              <Card className="bg-card border-secondary/20 hover:border-secondary transition-colors cursor-pointer shadow-lg hover:shadow-secondary/20">
+              <Card className="bg-card border-secondary/20 hover:border-secondary transition-colors cursor-pointer shadow-lg hover:shadow-secondary/20 overflow-hidden">
+                <div className="w-full h-48 relative border-b border-secondary/20">
+                  <Image src="/genesis_card.png" alt="Sega Genesis" fill className="object-cover" />
+                </div>
                 <CardHeader><CardTitle>Mega Drive / Genesis</CardTitle></CardHeader>
                 <CardContent>
                   <p className="text-lg text-secondary font-bold">Genesis Plus GX</p>
@@ -100,7 +109,10 @@ export function CoresSection() {
               </Card>
             </motion.div>
             <motion.div variants={cardVariants} whileHover="hover">
-              <Card className="bg-card border-secondary/20 hover:border-secondary transition-colors cursor-pointer shadow-lg hover:shadow-secondary/20">
+              <Card className="bg-card border-secondary/20 hover:border-secondary transition-colors cursor-pointer shadow-lg hover:shadow-secondary/20 overflow-hidden">
+                <div className="w-full h-48 relative border-b border-secondary/20">
+                  <Image src="/arcade_card.png" alt="Arcade Cabinet" fill className="object-cover" />
+                </div>
                 <CardHeader><CardTitle>Arcade (Fliperama)</CardTitle></CardHeader>
                 <CardContent>
                   <p className="text-lg text-secondary font-bold">Final Burn Neo (FBNeo)</p>
@@ -112,15 +124,15 @@ export function CoresSection() {
         </TabsContent>
         
         <TabsContent value="sony" className="mt-4">
-          <div className="flex justify-center mb-6">
-            <Image src="/sony.png" alt="Sony Consoles" width={400} height={300} className="rounded-lg shadow-[0_0_20px_rgba(0,255,100,0.4)]" />
-          </div>
           <motion.div 
             initial="hidden" animate="visible" variants={{ visible: { transition: { staggerChildren: 0.1 } } }}
             className="grid grid-cols-1 md:grid-cols-2 gap-4"
           >
             <motion.div variants={cardVariants} whileHover="hover">
-              <Card className="bg-card border-accent/20 hover:border-accent transition-colors cursor-pointer shadow-lg hover:shadow-accent/20">
+              <Card className="bg-card border-accent/20 hover:border-accent transition-colors cursor-pointer shadow-lg hover:shadow-accent/20 overflow-hidden">
+                <div className="w-full h-48 relative border-b border-accent/20">
+                  <Image src="/ps1_card.png" alt="PlayStation 1" fill className="object-cover" />
+                </div>
                 <CardHeader><CardTitle>PlayStation 1 (PSX)</CardTitle></CardHeader>
                 <CardContent>
                   <p className="text-lg text-accent font-bold">Beetle PSX HW ou SwanStation</p>
@@ -129,7 +141,10 @@ export function CoresSection() {
               </Card>
             </motion.div>
             <motion.div variants={cardVariants} whileHover="hover">
-              <Card className="bg-card border-accent/20 hover:border-accent transition-colors cursor-pointer shadow-lg hover:shadow-accent/20">
+              <Card className="bg-card border-accent/20 hover:border-accent transition-colors cursor-pointer shadow-lg hover:shadow-accent/20 overflow-hidden">
+                <div className="w-full h-48 relative border-b border-accent/20">
+                  <Image src="/psp_card.png" alt="PSP Console" fill className="object-cover" />
+                </div>
                 <CardHeader><CardTitle>PlayStation Portable (PSP)</CardTitle></CardHeader>
                 <CardContent>
                   <p className="text-lg text-accent font-bold">PPSSPP</p>
