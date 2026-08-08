@@ -6,6 +6,8 @@ import { TipsSection } from "@/components/TipsSection";
 import { CoresSection } from "@/components/CoresSection";
 import { FeaturesSection } from "@/components/FeaturesSection";
 import { ThemesGallery } from "@/components/ThemesGallery";
+import { HardwareAnalyzer } from "@/components/HardwareAnalyzer";
+import { ConfigBuilder } from "@/components/ConfigBuilder";
 import { Footer } from "@/components/Footer";
 
 export default function Home() {
@@ -16,6 +18,8 @@ export default function Home() {
         <AboutSection />
         <FeaturesSection />
         <ThemesGallery />
+        <HardwareAnalyzer />
+        <ConfigBuilder />
         <TipsSection />
         <CoresSection />
       </main>
