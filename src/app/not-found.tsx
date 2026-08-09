@@ -1,5 +1,6 @@
 import Link from "next/link";
-import { Button } from "@/components/ui/button";
+import { buttonVariants } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
 
 export default function NotFound() {
   return (
@@ -10,9 +11,10 @@ export default function NotFound() {
       <p className="text-muted-foreground mb-8 text-lg">
         Parece que você tentou carregar uma ROM que não existe neste cartucho.
       </p>
-      <Button asChild size="lg" className="rounded-full">
-        <Link href="/">Voltar para o Menu Principal</Link>
-      </Button>
+      <Link href="/" className={cn(buttonVariants({ size: "lg" }), "rounded-full")}>
+        Voltar para o Menu Principal
+      </Link>
     </div>
+
   );
 }
