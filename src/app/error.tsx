@@ -20,7 +20,7 @@ export default function Error({
         Glitch no Sistema!
       </h2>
       <p className="text-muted-foreground mb-8 text-lg max-w-md">
-        Algo deu errado ao carregar este conteúdo. Pode ter sido um "Bad ROM" ou um erro temporário.
+        Algo deu errado ao carregar este conteúdo. Pode ter sido um &quot;Bad ROM&quot; ou um erro temporário.
       </p>
       <Button onClick={() => reset()} size="lg" className="rounded-full bg-red-600 hover:bg-red-700 text-white">
         Tentar Novamente (Reset)

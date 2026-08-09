@@ -1,3 +1,4 @@
+"use client";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { MonitorPlay } from "lucide-react";
 import { motion } from "framer-motion";
@@ -32,3 +33,4 @@ export function AboutSection() {
     </motion.section>
   );
 }
+

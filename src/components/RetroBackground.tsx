@@ -1,8 +1,31 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { useEffect, useState } from "react";
+
+interface Particle {
+  opacity: number;
+  x: string;
+  scale: number;
+  duration: number;
+  delay: number;
+}
 
 export function RetroBackground() {
+  const [particles, setParticles] = useState<Particle[]>([]);
+
+  useEffect(() => {
+    setParticles(
+      [...Array(20)].map(() => ({
+        opacity: Math.random(),
+        x: Math.random() * 100 + "vw",
+        scale: Math.random() * 2,
+        duration: Math.random() * 10 + 5,
+        delay: Math.random() * 5,
+      }))
+    );
+  }, []);
+
   return (
     <div className="fixed inset-0 overflow-hidden pointer-events-none z-[-1] bg-black">
       {/* Synthwave Sun */}
@@ -38,24 +61,24 @@ export function RetroBackground() {
 
       {/* Falling Stars / Dust */}
       <div className="absolute inset-0">
-        {[...Array(20)].map((_, i) => (
+        {particles.map((p, i) => (
           <motion.div
             key={i}
             initial={{ 
-              opacity: Math.random(), 
+              opacity: p.opacity, 
               y: -10, 
-              x: Math.random() * 100 + "vw",
-              scale: Math.random() * 2 
+              x: p.x,
+              scale: p.scale 
             }}
             animate={{ 
               y: "100vh",
               opacity: [0, 1, 0]
             }}
             transition={{
-              duration: Math.random() * 10 + 5,
+              duration: p.duration,
               repeat: Infinity,
               ease: "linear",
-              delay: Math.random() * 5
+              delay: p.delay
             }}
             className="absolute w-1 h-1 bg-white rounded-full shadow-[0_0_5px_white]"
           />

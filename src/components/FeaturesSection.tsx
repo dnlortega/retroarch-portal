@@ -1,3 +1,4 @@
+"use client";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Trophy, Tv, Network, Settings2 } from "lucide-react";
 import { motion } from "framer-motion";
@@ -97,3 +98,4 @@ export function FeaturesSection() {
     </motion.section>
   );
 }
+

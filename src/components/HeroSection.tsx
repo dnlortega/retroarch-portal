@@ -1,3 +1,4 @@
+"use client";
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { Download, Gamepad2, Info } from "lucide-react";
@@ -63,3 +64,4 @@ export function HeroSection() {
     </section>
   );
 }
+

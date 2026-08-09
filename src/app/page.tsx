@@ -1,16 +1,16 @@
-"use client";
-
+import dynamic from "next/dynamic";
 import { HeroSection } from "@/components/HeroSection";
 import { AboutSection } from "@/components/AboutSection";
-import { TipsSection } from "@/components/TipsSection";
-import { CoresSection } from "@/components/CoresSection";
 import { FeaturesSection } from "@/components/FeaturesSection";
-import { ThemesGallery } from "@/components/ThemesGallery";
-import { HardwareAnalyzer } from "@/components/HardwareAnalyzer";
-import { ConfigBuilder } from "@/components/ConfigBuilder";
-import { CheatBuilder } from "@/components/CheatBuilder";
-import { RetroDictionary } from "@/components/RetroDictionary";
 import { Footer } from "@/components/Footer";
+
+const ThemesGallery = dynamic(() => import("@/components/ThemesGallery").then((mod) => mod.ThemesGallery), { ssr: true });
+const HardwareAnalyzer = dynamic(() => import("@/components/HardwareAnalyzer").then((mod) => mod.HardwareAnalyzer), { ssr: false });
+const ConfigBuilder = dynamic(() => import("@/components/ConfigBuilder").then((mod) => mod.ConfigBuilder), { ssr: false });
+const CheatBuilder = dynamic(() => import("@/components/CheatBuilder").then((mod) => mod.CheatBuilder), { ssr: false });
+const RetroDictionary = dynamic(() => import("@/components/RetroDictionary").then((mod) => mod.RetroDictionary), { ssr: true });
+const TipsSection = dynamic(() => import("@/components/TipsSection").then((mod) => mod.TipsSection), { ssr: true });
+const CoresSection = dynamic(() => import("@/components/CoresSection").then((mod) => mod.CoresSection), { ssr: true });
 
 export default function Home() {
   return (
