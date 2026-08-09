@@ -47,7 +47,14 @@ export function TipsSection() {
           <AccordionContent className="text-lg text-muted-foreground space-y-2">
             <p><strong>ROMs</strong> são os arquivos dos jogos. O RetroArch não vem com jogos pré-instalados.</p>
             <ul className="list-disc pl-5">
-              <li><strong>Legalidade:</strong> É recomendado que você extraia (faça o "dump") dos seus próprios cartuchos e CDs físicos. Para baixar jogos gratuitos, legais e desenvolvidos pela comunidade, recomendamos o site <a href="https://pdroms.de/" target="_blank" rel="noreferrer" className="text-primary hover:underline">PDRoms</a>, focado em jogos de Domínio Público e Homebrews.</li>
+              <li><strong>Onde Baixar:</strong> É recomendado que você faça o "dump" dos seus próprios jogos físicos. No entanto, a comunidade frequentemente utiliza os seguintes sites para encontrar ROMs e tirar dúvidas:
+                <ul className="list-disc pl-5 mt-2 space-y-1 mb-2">
+                  <li><a href="https://www.retrostic.com/pt" target="_blank" rel="noreferrer" className="text-primary hover:underline">Retrostic (Em Português)</a></li>
+                  <li><a href="https://www.romsgames.net/" target="_blank" rel="noreferrer" className="text-primary hover:underline">RomsGames.net</a></li>
+                  <li><a href="https://forum.macmagazine.com.br/topic/272687-baixar-roms-para-o-retroarch/" target="_blank" rel="noreferrer" className="text-primary hover:underline">Fórum MacMagazine - Dicas de ROMs para RetroArch</a></li>
+                  <li><a href="https://pdroms.de/" target="_blank" rel="noreferrer" className="text-primary hover:underline">PDRoms (Focado em Homebrews e Domínio Público)</a></li>
+                </ul>
+              </li>
               <li><strong>Como usar:</strong> Crie uma pasta chamada "Games" no seu PC. No RetroArch, vá em <em>Importar Conteúdo &gt; Analisar Diretório</em>. Ele vai procurar as ROMs e criar listas de reprodução lindas (Playlists) separadas por videogame!</li>
               <li><strong>Dica de Ouro:</strong> Mantenha os arquivos no formato <code>.zip</code> para economizar espaço (a maioria dos Cores da Nintendo e Sega suportam ler arquivos zipados direto).</li>
             </ul>
