@@ -21,6 +21,9 @@ export const metadata: Metadata = {
   title: "RetroArch Portal - O Hub Definitivo",
   description: "O guia e hub definitivo para emulação com RetroArch.",
   manifest: "/manifest.json",
+};
+
+export const viewport = {
   themeColor: "#ff00ff",
 };
 
