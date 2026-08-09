@@ -5,6 +5,7 @@ import { ThemeSwitcher } from "@/components/ThemeSwitcher";
 import { KonamiCode } from "@/components/KonamiCode";
 import { RetroAnimations } from "@/components/RetroAnimations";
 import { RetroRadio } from "@/components/RetroRadio";
+import { RetroBackground } from "@/components/RetroBackground";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -33,9 +34,9 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <link rel="apple-touch-icon" href="/retro_game.png" />
       </head>
       <body 
-        className="min-h-full flex flex-col bg-fixed bg-cover bg-center bg-no-repeat transition-colors duration-500"
-        style={{ backgroundImage: "url('/bg-retro.png')" }}
+        className="min-h-full flex flex-col transition-colors duration-500"
       >
+        <RetroBackground />
         <script
           dangerouslySetInnerHTML={{
             __html: `
