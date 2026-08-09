@@ -10,6 +10,7 @@ const ConfigBuilder = dynamic(() => import("@/components/ConfigBuilder").then((m
 const CheatBuilder = dynamic(() => import("@/components/CheatBuilder").then((mod) => mod.CheatBuilder));
 const RetroDictionary = dynamic(() => import("@/components/RetroDictionary").then((mod) => mod.RetroDictionary));
 const TipsSection = dynamic(() => import("@/components/TipsSection").then((mod) => mod.TipsSection));
+const TutorialsSection = dynamic(() => import("@/components/TutorialsSection").then((mod) => mod.TutorialsSection));
 const CoresSection = dynamic(() => import("@/components/CoresSection").then((mod) => mod.CoresSection));
 
 export default function Home() {
@@ -25,6 +26,7 @@ export default function Home() {
         <CheatBuilder />
         <RetroDictionary />
         <TipsSection />
+        <TutorialsSection />
         <CoresSection />
       </main>
       <Footer />
