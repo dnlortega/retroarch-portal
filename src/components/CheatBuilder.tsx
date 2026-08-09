@@ -85,6 +85,7 @@ export function CheatBuilder() {
               {games.map(game => (
                 <button
                   key={game.id}
+                  aria-label={`Selecionar jogo: ${game.name}`}
                   onClick={() => {
                     setSelectedGame(game.id);
                     setActiveCheats({}); // reset
@@ -103,10 +104,12 @@ export function CheatBuilder() {
               {currentGame.cheats.map(cheat => (
                 <div key={cheat.id} className="flex items-center justify-between p-4 bg-muted/30 rounded-lg border border-border">
                   <div className="space-y-1">
-                    <Label className="text-base font-bold">{cheat.label}</Label>
+                    <Label htmlFor={`cheat-${cheat.id}`} className="text-base font-bold">{cheat.label}</Label>
                     <p className="text-xs text-muted-foreground font-mono">{cheat.code}</p>
                   </div>
                   <Switch 
+                    id={`cheat-${cheat.id}`}
+                    aria-label={`Ativar trapaça: ${cheat.label}`}
                     checked={!!activeCheats[cheat.id]} 
                     onCheckedChange={() => toggleCheat(cheat.id)} 
                   />
@@ -118,6 +121,7 @@ export function CheatBuilder() {
           <div className="flex justify-center pt-4">
             <button 
               onClick={generateAndDownloadCht}
+              aria-label="Baixar arquivo de trapaças .cht gerado"
               className="flex items-center gap-2 px-8 py-4 bg-accent text-accent-foreground font-bold rounded-full shadow-[0_0_20px_rgba(0,255,128,0.4)] hover:shadow-[0_0_40px_rgba(0,255,128,0.8)] hover:scale-105 transition-all"
             >
               <Download className="w-5 h-5" />

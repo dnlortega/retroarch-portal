@@ -66,42 +66,42 @@ export function ConfigBuilder() {
             
             <div className="flex items-center justify-between p-4 bg-muted/30 rounded-lg border border-border">
               <div className="space-y-0.5">
-                <Label className="text-base font-bold">V-Sync (Sincronia Vertical)</Label>
+                <Label htmlFor="vsync-switch" className="text-base font-bold">V-Sync (Sincronia Vertical)</Label>
                 <p className="text-sm text-muted-foreground">Evita "cortes" na tela, mas pode adicionar milissegundos de lag.</p>
               </div>
-              <Switch checked={vsync} onCheckedChange={setVsync} />
+              <Switch id="vsync-switch" aria-label="Ativar V-Sync" checked={vsync} onCheckedChange={setVsync} />
             </div>
 
             <div className="flex items-center justify-between p-4 bg-muted/30 rounded-lg border border-border">
               <div className="space-y-0.5">
-                <Label className="text-base font-bold text-secondary">Run-Ahead (Anti-Lag)</Label>
+                <Label htmlFor="runahead-switch" className="text-base font-bold text-secondary">Run-Ahead (Anti-Lag)</Label>
                 <p className="text-sm text-muted-foreground">Remove o atraso dos controles lendo quadros no futuro. Exige CPU forte.</p>
               </div>
-              <Switch checked={runAhead} onCheckedChange={setRunAhead} />
+              <Switch id="runahead-switch" aria-label="Ativar Run-Ahead" checked={runAhead} onCheckedChange={setRunAhead} />
             </div>
 
             <div className="flex items-center justify-between p-4 bg-muted/30 rounded-lg border border-border">
               <div className="space-y-0.5">
-                <Label className="text-base font-bold text-accent">Auto Save/Load</Label>
+                <Label htmlFor="autosave-switch" className="text-base font-bold text-accent">Auto Save/Load</Label>
                 <p className="text-sm text-muted-foreground">Salva automaticamente ao sair e continua de onde parou ao abrir o jogo.</p>
               </div>
-              <Switch checked={autoSave} onCheckedChange={setAutoSave} />
+              <Switch id="autosave-switch" aria-label="Ativar Auto Save" checked={autoSave} onCheckedChange={setAutoSave} />
             </div>
 
             <div className="flex items-center justify-between p-4 bg-muted/30 rounded-lg border border-border">
               <div className="space-y-0.5">
-                <Label className="text-base font-bold">Ligar Shaders por Padrão</Label>
+                <Label htmlFor="crt-switch" className="text-base font-bold">Ligar Shaders por Padrão</Label>
                 <p className="text-sm text-muted-foreground">Ativa a camada de filtro CRT automaticamente para todos os jogos.</p>
               </div>
-              <Switch checked={crtFilter} onCheckedChange={setCrtFilter} />
+              <Switch id="crt-switch" aria-label="Ativar Filtros CRT" checked={crtFilter} onCheckedChange={setCrtFilter} />
             </div>
 
             <div className="flex items-center justify-between p-4 bg-muted/30 rounded-lg border border-border md:col-span-2">
               <div className="space-y-0.5">
-                <Label className="text-base font-bold text-primary">Atalho de Fast-Forward (Tecla Espaço)</Label>
+                <Label htmlFor="fastforward-switch" className="text-base font-bold text-primary">Atalho de Fast-Forward (Tecla Espaço)</Label>
                 <p className="text-sm text-muted-foreground">Permite acelerar o jogo enquanto você segura a barra de espaço (ótimo para pular diálogos em RPGs).</p>
               </div>
-              <Switch checked={fastForward} onCheckedChange={setFastForward} />
+              <Switch id="fastforward-switch" aria-label="Ativar atalho Fast-Forward" checked={fastForward} onCheckedChange={setFastForward} />
             </div>
 
           </div>
@@ -109,6 +109,7 @@ export function ConfigBuilder() {
           <div className="flex justify-center pt-4">
             <button 
               onClick={generateAndDownloadCfg}
+              aria-label="Baixar arquivo retroarch.cfg gerado"
               className="flex items-center gap-2 px-8 py-4 bg-primary text-primary-foreground font-bold rounded-full shadow-[0_0_20px_rgba(255,0,255,0.4)] hover:shadow-[0_0_40px_rgba(255,0,255,0.8)] hover:scale-105 transition-all"
             >
               <Download className="w-5 h-5" />

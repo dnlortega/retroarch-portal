@@ -6,6 +6,8 @@ import { KonamiCode } from "@/components/KonamiCode";
 import { RetroAnimations } from "@/components/RetroAnimations";
 import { RetroRadio } from "@/components/RetroRadio";
 import { RetroBackground } from "@/components/RetroBackground";
+import { Analytics } from "@vercel/analytics/react";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -40,21 +42,6 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         className="min-h-full flex flex-col transition-colors duration-500"
       >
         <RetroBackground />
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-              if ('serviceWorker' in navigator) {
-                window.addEventListener('load', function() {
-                  navigator.serviceWorker.register('/sw.js').then(function(registration) {
-                    console.log('ServiceWorker registration successful with scope: ', registration.scope);
-                  }, function(err) {
-                    console.log('ServiceWorker registration failed: ', err);
-                  });
-                });
-              }
-            `,
-          }}
-        />
         <ThemeSwitcher />
         <KonamiCode />
         <RetroAnimations />
@@ -62,6 +49,8 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <div className="flex-1 bg-background/80 backdrop-blur-sm transition-colors duration-500 z-10 relative">
           {children}
         </div>
+        <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   );
