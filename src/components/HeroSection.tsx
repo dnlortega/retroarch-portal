@@ -1,7 +1,7 @@
 "use client";
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import { Download, Gamepad2, Info } from "lucide-react";
+import { Download, Gamepad2, Info, Rocket } from "lucide-react";
 import { motion } from "framer-motion";
 
 export function HeroSection() {
@@ -38,7 +38,7 @@ export function HeroSection() {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ type: "spring", stiffness: 100, damping: 10, delay: 0.3 }}
-        className="flex flex-col sm:flex-row justify-center gap-4 pt-6"
+        className="flex flex-col sm:flex-row justify-center gap-4 pt-6 flex-wrap"
       >
         <motion.a 
           whileHover={{ scale: 1.05 }}
@@ -50,6 +50,15 @@ export function HeroSection() {
         >
           <Download className="w-5 h-5" />
           Baixar Oficial
+        </motion.a>
+        <motion.a 
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+          href="/drive-downloader"
+          className={cn(buttonVariants({ size: "lg", className: "text-lg px-8 gap-2 bg-blue-600 hover:bg-blue-500 text-white font-semibold rounded-full shadow-[0_0_20px_rgba(37,99,235,0.6)] transition-all hover:shadow-[0_0_40px_rgba(37,99,235,0.9)]" }))}
+        >
+          <Rocket className="w-5 h-5" />
+          Baixar ROMs em Massa
         </motion.a>
         <motion.a 
           whileHover={{ scale: 1.05 }}
