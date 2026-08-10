@@ -74,7 +74,31 @@ export function TipsSection() {
           </AccordionContent>
         </AccordionItem>
       </Accordion>
+
+      {/* DriveDownloader Banner */}
+      <motion.div 
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        className="mt-12 p-1 rounded-2xl bg-gradient-to-r from-blue-500 via-primary to-purple-500"
+      >
+        <div className="bg-card/90 backdrop-blur rounded-xl p-8 flex flex-col md:flex-row items-center justify-between gap-6">
+          <div className="space-y-2 text-center md:text-left">
+            <h3 className="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400">
+              Cansado de baixar ROMs uma por uma?
+            </h3>
+            <p className="text-muted-foreground text-lg">
+              Conheça o <strong>Google Drive Downloader Pro</strong>, nossa ferramenta oficial para baixar coleções completas no modo Turbo!
+            </p>
+          </div>
+          <a 
+            href="/drive-downloader" 
+            className="whitespace-nowrap px-8 py-4 bg-primary text-primary-foreground font-bold rounded-full shadow-lg shadow-primary/20 hover:scale-105 transition-transform"
+          >
+            Conhecer Ferramenta
+          </a>
+        </div>
+      </motion.div>
     </motion.section>
   );
 }
-
