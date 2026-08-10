@@ -1,140 +1,216 @@
+"use client";
+import { useState, useRef } from "react";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Download, Rocket, Filter, ShieldCheck, Zap, HardDriveDownload, ArrowLeft } from "lucide-react";
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
+import { HardDriveDownload, ArrowLeft, Search, Play, CheckCircle2, Loader2, XCircle, Clock } from "lucide-react";
 import Link from "next/link";
-import Image from "next/image";
+import { motion, AnimatePresence } from "framer-motion";
+
+interface DriveFile {
+  id: string;
+  name: string;
+  size: string;
+  status: "idle" | "downloading" | "success" | "error";
+}
 
 export default function DriveDownloaderPage() {
+  const [url, setUrl] = useState("");
+  const [filter, setFilter] = useState("Todos");
+  const [files, setFiles] = useState<DriveFile[]>([]);
+  const [isAnalyzing, setIsAnalyzing] = useState(false);
+  const [isDownloading, setIsDownloading] = useState(false);
+  const [errorMsg, setErrorMsg] = useState("");
+  const iframeContainerRef = useRef<HTMLDivElement>(null);
+
+  const handleAnalyze = async () => {
+    if (!url) return;
+    setIsAnalyzing(true);
+    setErrorMsg("");
+    setFiles([]);
+
+    try {
+      const res = await fetch("/api/drive-analyze", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ url })
+      });
+      const data = await res.json();
+      
+      if (!res.ok) {
+        throw new Error(data.error || "Erro ao analisar link");
+      }
+
+      let filteredFiles = data.files;
+      if (filter !== "Todos") {
+        filteredFiles = data.files.filter((f: any) => {
+          const ext = f.name.split('.').pop()?.toLowerCase();
+          if (filter === "Imagens") return ["jpg", "jpeg", "png", "gif", "webp"].includes(ext);
+          if (filter === "Vídeos") return ["mp4", "mkv", "avi", "mov", "webm"].includes(ext);
+          if (filter === "Documentos") return ["pdf", "doc", "docx", "txt", "xls", "xlsx"].includes(ext);
+          return true;
+        });
+      }
+
+      setFiles(filteredFiles.map((f: any) => ({ ...f, status: "idle" })));
+    } catch (err: any) {
+      setErrorMsg(err.message);
+    } finally {
+      setIsAnalyzing(false);
+    }
+  };
+
+  const startDownload = async () => {
+    if (files.length === 0 || isDownloading) return;
+    setIsDownloading(true);
+
+    for (let i = 0; i < files.length; i++) {
+      if (files[i].status === "success") continue;
+
+      // Update status to downloading
+      setFiles(prev => {
+        const newFiles = [...prev];
+        newFiles[i].status = "downloading";
+        return newFiles;
+      });
+
+      // Trigger download via hidden iframe
+      const downloadUrl = `https://drive.google.com/uc?export=download&id=${files[i].id}`;
+      
+      const iframe = document.createElement('iframe');
+      iframe.style.display = 'none';
+      iframe.src = downloadUrl;
+      
+      if (iframeContainerRef.current) {
+        iframeContainerRef.current.appendChild(iframe);
+      }
+
+      // Wait a bit for the browser to catch the download header before marking success
+      // In a real scenario, detecting completion from a cross-origin iframe is impossible,
+      // so we just delay before moving to the next.
+      await new Promise(resolve => setTimeout(resolve, 1500));
+
+      setFiles(prev => {
+        const newFiles = [...prev];
+        newFiles[i].status = "success";
+        return newFiles;
+      });
+      
+      // Cleanup iframe after a few seconds
+      setTimeout(() => {
+        if (iframe.parentNode) iframe.parentNode.removeChild(iframe);
+      }, 10000);
+      
+      // Wait before starting the next file to prevent browser blocking multiple downloads
+      await new Promise(resolve => setTimeout(resolve, 2000));
+    }
+
+    setIsDownloading(false);
+  };
+
   return (
     <div className="min-h-screen bg-background text-foreground flex flex-col font-sans">
       <header className="container mx-auto px-4 py-6">
-        <Button variant="ghost" asChild className="mb-4">
-          <Link href="/" className="flex items-center gap-2">
-            <ArrowLeft className="w-4 h-4" /> Voltar para o Portal
-          </Link>
-        </Button>
+        <Link href="/" className={`inline-flex items-center gap-2 mb-4 px-4 py-2 hover:bg-accent hover:text-accent-foreground rounded-md text-sm font-medium transition-colors`}>
+          <ArrowLeft className="w-4 h-4" /> Voltar para o Portal
+        </Link>
       </header>
 
-      <main className="flex-1 container mx-auto px-4 md:px-6 lg:px-8 space-y-24 py-8">
-        
-        {/* Hero Section */}
-        <section className="text-center space-y-6 max-w-4xl mx-auto">
-          <div className="inline-block p-4 rounded-full bg-primary/10 text-primary mb-4">
-            <HardDriveDownload className="w-16 h-16" />
+      <main className="flex-1 container mx-auto px-4 md:px-6 max-w-5xl space-y-12 pb-12">
+        <section className="text-center space-y-4">
+          <div className="inline-flex p-4 rounded-full bg-blue-500/10 text-blue-500 mb-2">
+            <HardDriveDownload className="w-12 h-12" />
           </div>
-          <h1 className="text-5xl md:text-7xl font-extrabold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-blue-500 via-primary to-purple-500">
-            Google Drive Downloader Pro
+          <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-blue-500 via-primary to-purple-500">
+            Drive Downloader Web
           </h1>
-          <p className="text-xl text-muted-foreground leading-relaxed">
-            A ferramenta definitiva e autônoma para baixar gigabytes de ROMs, coleções completas e arquivos do Google Drive com velocidade extrema e resiliência.
+          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+            Cole o link de uma pasta pública do Google Drive para baixar todos os arquivos em lote direto pelo seu navegador.
           </p>
-          <div className="pt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
-            <Button size="lg" asChild className="rounded-full px-8 py-6 text-lg w-full sm:w-auto shadow-lg shadow-primary/20">
-              <a href="/DriveDownloader.exe" download>
-                <Download className="w-5 h-5 mr-2" /> Baixar Versão Windows (.exe)
-              </a>
-            </Button>
-            <Button size="lg" variant="outline" asChild className="rounded-full px-8 py-6 text-lg w-full sm:w-auto">
-              <a href="#como-usar">Como Funciona</a>
-            </Button>
-          </div>
-          <p className="text-sm text-muted-foreground mt-4">Versão Standalone (Não requer Python) • ~39MB</p>
         </section>
 
-        {/* Splash Image Showcase */}
-        <section className="relative mx-auto max-w-5xl rounded-2xl overflow-hidden border border-border/50 shadow-2xl">
-          <div className="absolute inset-0 bg-gradient-to-b from-transparent to-background/90 z-10" />
-          <Image 
-            src="/drive-splash.png" 
-            alt="Interface do Drive Downloader" 
-            width={1200} 
-            height={600} 
-            className="w-full object-cover rounded-2xl opacity-90"
-          />
-        </section>
+        <Card className="border-2 shadow-2xl bg-card/60 backdrop-blur-xl border-blue-500/20">
+          <CardHeader>
+            <CardTitle>Painel de Controle</CardTitle>
+            <CardDescription>Configure sua fila de downloads</CardDescription>
+          </CardHeader>
+          <CardContent className="space-y-6">
+            <div className="flex flex-col md:flex-row gap-4">
+              <input 
+                type="text" 
+                value={url}
+                onChange={(e) => setUrl(e.target.value)}
+                placeholder="Cole o link do Google Drive aqui..."
+                className="flex-1 bg-background border border-input rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-primary"
+              />
+              <select 
+                value={filter}
+                onChange={(e) => setFilter(e.target.value)}
+                className="bg-background border border-input rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-primary"
+              >
+                <option value="Todos">Todos os Arquivos</option>
+                <option value="Imagens">Apenas Imagens</option>
+                <option value="Vídeos">Apenas Vídeos</option>
+                <option value="Documentos">Documentos</option>
+              </select>
+              <Button onClick={handleAnalyze} disabled={isAnalyzing || !url} className="px-8 bg-blue-600 hover:bg-blue-500 text-white">
+                {isAnalyzing ? <Loader2 className="w-5 h-5 animate-spin" /> : <Search className="w-5 h-5 mr-2" />}
+                {isAnalyzing ? "Analisando..." : "Analisar"}
+              </Button>
+            </div>
 
-        {/* Features Grid */}
-        <section className="space-y-12">
-          <div className="text-center space-y-4">
-            <h2 className="text-3xl font-bold">Recursos Profissionais</h2>
-            <p className="text-muted-foreground max-w-2xl mx-auto">Desenvolvido para máxima eficiência na hora de montar sua biblioteca de jogos retrô ou fazer backups em massa.</p>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            <Card className="bg-card/50 backdrop-blur border-blue-500/20">
-              <CardHeader>
-                <Rocket className="w-8 h-8 text-blue-500 mb-2" />
-                <CardTitle>Multithreading (Turbo)</CardTitle>
-              </CardHeader>
-              <CardContent className="text-muted-foreground">
-                Baixe até 10 arquivos simultaneamente. Configurável dinamicamente através de um controle deslizante na interface.
-              </CardContent>
-            </Card>
-            <Card className="bg-card/50 backdrop-blur border-green-500/20">
-              <CardHeader>
-                <Filter className="w-8 h-8 text-green-500 mb-2" />
-                <CardTitle>Filtros Inteligentes</CardTitle>
-              </CardHeader>
-              <CardContent className="text-muted-foreground">
-                Escolha baixar a pasta inteira ou filtre automaticamente apenas por Imagens, Vídeos ou Documentos. O sistema ignora o resto.
-              </CardContent>
-            </Card>
-            <Card className="bg-card/50 backdrop-blur border-purple-500/20">
-              <CardHeader>
-                <ShieldCheck className="w-8 h-8 text-purple-500 mb-2" />
-                <CardTitle>Rede Resiliente (Auto-Retry)</CardTitle>
-              </CardHeader>
-              <CardContent className="text-muted-foreground">
-                Em caso de quedas na conexão ou falhas de servidor, o sistema faz até 3 tentativas de reconexão invisíveis antes de acusar erro.
-              </CardContent>
-            </Card>
-            <Card className="bg-card/50 backdrop-blur border-orange-500/20 lg:col-span-3">
-              <CardHeader>
-                <Zap className="w-8 h-8 text-orange-500 mb-2" />
-                <CardTitle>Eficiência de Banda (Skip Automático)</CardTitle>
-              </CardHeader>
-              <CardContent className="text-muted-foreground">
-                Se a sua internet cair no meio do processo ou você quiser retomar um download depois, não se preocupe. O sistema identifica se um arquivo já existe localmente e o pula automaticamente (Skip), economizando horas de re-download e franquia de dados.
-              </CardContent>
-            </Card>
-          </div>
-        </section>
+            {errorMsg && (
+              <div className="p-4 bg-destructive/10 text-destructive rounded-lg flex items-center gap-2 border border-destructive/20">
+                <XCircle className="w-5 h-5" /> {errorMsg}
+              </div>
+            )}
 
-        {/* How to Use */}
-        <section id="como-usar" className="max-w-4xl mx-auto space-y-8 bg-muted/30 p-8 md:p-12 rounded-3xl border border-border">
-          <div className="space-y-2 text-center mb-8">
-            <h2 className="text-3xl font-bold">Como Usar</h2>
-            <p className="text-muted-foreground">É simples, rápido e não exige conhecimentos técnicos.</p>
-          </div>
-          <ol className="relative border-l border-primary/30 ml-4 space-y-10">
-            <li className="pl-8 relative">
-              <div className="absolute w-6 h-6 bg-primary rounded-full -left-3 top-0 flex items-center justify-center text-xs font-bold text-primary-foreground border-4 border-background">1</div>
-              <h3 className="font-bold text-lg mb-1">Baixe e Abra</h3>
-              <p className="text-muted-foreground">Baixe o arquivo <code>.exe</code> no botão acima e execute-o. Não precisa instalar nada, é um aplicativo portátil!</p>
-            </li>
-            <li className="pl-8 relative">
-              <div className="absolute w-6 h-6 bg-primary rounded-full -left-3 top-0 flex items-center justify-center text-xs font-bold text-primary-foreground border-4 border-background">2</div>
-              <h3 className="font-bold text-lg mb-1">Escolha a Pasta de Destino</h3>
-              <p className="text-muted-foreground">Clique em <strong>Procurar Pasta</strong> e selecione onde os arquivos (ROMs, BIOS, etc) serão salvos no seu computador.</p>
-            </li>
-            <li className="pl-8 relative">
-              <div className="absolute w-6 h-6 bg-primary rounded-full -left-3 top-0 flex items-center justify-center text-xs font-bold text-primary-foreground border-4 border-background">3</div>
-              <h3 className="font-bold text-lg mb-1">Cole o Link do Drive</h3>
-              <p className="text-muted-foreground">Insira o link público da pasta do Google Drive. O histórico lembrará dos seus últimos 5 links automaticamente!</p>
-            </li>
-            <li className="pl-8 relative">
-              <div className="absolute w-6 h-6 bg-primary rounded-full -left-3 top-0 flex items-center justify-center text-xs font-bold text-primary-foreground border-4 border-background">4</div>
-              <h3 className="font-bold text-lg mb-1">Inicie o Download</h3>
-              <p className="text-muted-foreground">Clique em <strong>Analisar</strong> para listar os arquivos e depois no botão verde <strong>Iniciar Download</strong>. Um alerta sonoro do Windows te avisará quando terminar!</p>
-            </li>
-          </ol>
-        </section>
+            {files.length > 0 && (
+              <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="space-y-4">
+                <div className="flex justify-between items-end border-b pb-2">
+                  <div>
+                    <h3 className="font-bold text-lg">Fila de Downloads</h3>
+                    <p className="text-sm text-muted-foreground">{files.length} arquivos encontrados.</p>
+                  </div>
+                  <Button onClick={startDownload} disabled={isDownloading} className="bg-green-600 hover:bg-green-500 text-white shadow-lg shadow-green-600/20">
+                    {isDownloading ? <Loader2 className="w-5 h-5 animate-spin mr-2" /> : <Play className="w-5 h-5 mr-2" />}
+                    {isDownloading ? "Processando Fila..." : "Iniciar Download em Lote"}
+                  </Button>
+                </div>
+
+                <div className="max-h-[400px] overflow-y-auto space-y-2 pr-2">
+                  <AnimatePresence>
+                    {files.map((file, idx) => (
+                      <motion.div 
+                        key={file.id + idx}
+                        initial={{ opacity: 0, x: -10 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        className={`flex items-center justify-between p-3 rounded-lg border transition-colors ${
+                          file.status === 'downloading' ? 'bg-primary/10 border-primary/30' : 
+                          file.status === 'success' ? 'bg-green-500/10 border-green-500/30' : 
+                          'bg-background border-border hover:bg-muted/50'
+                        }`}
+                      >
+                        <div className="flex items-center gap-3 overflow-hidden">
+                          {file.status === 'idle' && <Clock className="w-5 h-5 text-muted-foreground shrink-0" />}
+                          {file.status === 'downloading' && <Loader2 className="w-5 h-5 animate-spin text-primary shrink-0" />}
+                          {file.status === 'success' && <CheckCircle2 className="w-5 h-5 text-green-500 shrink-0" />}
+                          <span className="truncate font-medium">{file.name}</span>
+                        </div>
+                        <span className="text-sm text-muted-foreground whitespace-nowrap ml-4">
+                          {file.status === 'downloading' ? 'Preparando...' : file.status === 'success' ? 'Enviado pro Navegador' : 'Aguardando'}
+                        </span>
+                      </motion.div>
+                    ))}
+                  </AnimatePresence>
+                </div>
+              </motion.div>
+            )}
+          </CardContent>
+        </Card>
       </main>
 
-      <footer className="border-t py-8 mt-12">
-        <div className="container mx-auto text-center text-muted-foreground">
-          <p>Projeto de código aberto desenvolvido em Python.</p>
-        </div>
-      </footer>
+      {/* Hidden container for iframes to trigger downloads */}
+      <div ref={iframeContainerRef} style={{ display: 'none' }} />
     </div>
   );
 }
