@@ -37,31 +37,30 @@ export async function POST(request: Request) {
       
       const html = await response.text();
       
-      // Procura pelo padrão JSON embutido na página (window.ds)
-      // Nota: Esta é uma abordagem heurística e pode falhar se o Google mudar o layout,
-      // mas é a mais próxima do que ferramentas como gdown fazem.
+      // Procura pelo padrão DOM embutido na página
       try {
-        const regex = /"([a-zA-Z0-9_-]{28,33})",\["([^"]+\.[a-zA-Z0-9]{2,5})"/g;
+        const regex = /data-id="([a-zA-Z0-9_-]{28,33})"[^>]*?data-tooltip="([^"]+)"/g;
         let m;
         const uniqueIds = new Set();
         
         while ((m = regex.exec(html)) !== null) {
-          if (m.index === regex.lastIndex) {
-            regex.lastIndex++;
-          }
-          const [ , id, name ] = m;
-          if (!uniqueIds.has(id)) {
+          const id = m[1];
+          const name = m[2];
+          
+          // Filtra possíveis itens que não sejam arquivos reais (ex: pastas sem extensão, botoes)
+          // Na maioria das vezes, arquivos tem extensão (.)
+          if (!uniqueIds.has(id) && name.includes('.')) {
             uniqueIds.add(id);
             files.push({ id, name, size: 'Desconhecido' });
           }
         }
         
-        // Se a regex primária falhar, tenta outra heurística comum
+        // Se a regex primária falhar, tenta a heurística antiga de JSON embutido
         if (files.length === 0) {
-           const fallbackRegex = /\["([a-zA-Z0-9_-]{28,33})",\["([^"]+)"/g;
+           const fallbackRegex = /\["([a-zA-Z0-9_-]{28,33})",\["([^"]+\.[a-zA-Z0-9]{2,5})"/g;
            while ((m = fallbackRegex.exec(html)) !== null) {
               const [ , id, name ] = m;
-              if (!uniqueIds.has(id) && name.includes('.')) {
+              if (!uniqueIds.has(id)) {
                 uniqueIds.add(id);
                 files.push({ id, name, size: 'Desconhecido' });
               }
